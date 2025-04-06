@@ -1,20 +1,26 @@
-import math
+# Nhập số N
+N = int(input())
  
-n = int(input())
- 
-gh = int(math.sqrt(n)) + 1
- 
-so_nguyen_to = [True] * (gh + 1)
-so_nguyen_to[0] = so_nguyen_to[1] = False
+p = 2
 
-for i in range(2, int(math.sqrt(gh)) + 1):
-    if so_nguyen_to[i]:
-        for j in range(i * i, gh + 1, i):
-            so_nguyen_to[j] = False
+while True: 
+    so_nguyen_to = True
+    if p > 2 and p % 2 == 0:   
+        so_nguyen_to = False
+    else:
+        i = 2
+        while i * i <= p:
+            if p % i == 0:
+                so_nguyen_to = False
+                break
+            i += 1
  
-for p in range(2, gh + 1):
-    if so_nguyen_to[p]:
+    if so_nguyen_to:
         gan_nguyen_to = p * p
-        if gan_nguyen_to >= n:
+        if gan_nguyen_to >= N:
             print(gan_nguyen_to)
-            break
+            break 
+    p += 1 if p == 2 else 2 
+    if p > 1000000:  
+        print(-1)
+        break

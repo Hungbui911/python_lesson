@@ -8,13 +8,13 @@ def find_max_min(A, B):
      
     i, j = 0, 0
     while i < n and j < m:
-        if A[i] < B[j]:
+        if A[i] > B[j]:
+            Cmax.append(A[i])
             Cmin.append(A[i])
-            Cmax.append(B[j])
             i += 1
         else:
+            Cmax.append(B[j])
             Cmin.append(B[j])
-            Cmax.append(A[i])
             j += 1
  
     Cmax.extend(A[i:])
