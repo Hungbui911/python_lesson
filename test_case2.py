@@ -1,17 +1,30 @@
-s1 = input().strip()
-s2 = input().strip()
+import math
 
-n, m = len(s1), len(s2)
+n = int(input())
+s = 0
+l = int(n ** 0.5)
  
-p = [0] * (m + 1)
-c = [0] * (m + 1)
+p = [True] * (l + 1)
+p[0] = p[1] = False
+ps = []
 
-for i in range(1, n + 1):
-    for j in range(1, m + 1):
-        if s1[i - 1] == s2[j - 1]:
-            c[j] = p[j - 1] + 1
+for i in range(2, l + 1):
+    if p[i]:
+        ps.append(i)
+        for j in range(i * i, l + 1, i):
+            p[j] = False
+ 
+for i in range(len(ps)):
+    for j in range(i + 1, len(ps)):
+        if ps[i] * ps[j] <= l:
+            s += 1
         else:
-            c[j] = max(p[j], c[j - 1]) 
-    p, c = c, p
+            break
+ 
+for pa in ps:
+    if pa ** 8 <= n:
+        s += 1
+    else:
+        break
 
-print(p[m])
+print(s)
